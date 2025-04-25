@@ -15,7 +15,7 @@ class ApiService {
         body: json.encode({
           'Value': {
             'P_DLVRY_NO': '1010',
-            'P_LANG_NO': '2', 
+            'P_LANG_NO': '2',
             'P_BILL_SRL': '',
             'P_PRCSSD_FLG': '',
           },
@@ -23,7 +23,7 @@ class ApiService {
       );
 
       if (response.statusCode == 200) {
-        print('Response body: ${response.body}');
+        // print('Response body: ${response.body}');
 
         final Map<String, dynamic> jsonResponse = json.decode(response.body);
 
@@ -37,7 +37,6 @@ class ApiService {
   }
 
   List<BillItem> parseResponse(Map<String, dynamic> jsonResponse) {
-
     if (jsonResponse.containsKey('Data') &&
         jsonResponse['Data'].containsKey('DeliveryBills')) {
       List<dynamic> data = jsonResponse['Data']['DeliveryBills'];

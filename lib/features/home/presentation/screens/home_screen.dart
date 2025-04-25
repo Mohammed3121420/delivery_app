@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import '../../../../core/utils/api_service.dart';
 import '../../../../core/utils/database_helper.dart';
 import '../../../../core/utils/shared_preferences_helper.dart';
+import '../../../../methods/session_manager.dart';
 import '../../../auth/data/models/bill_item.dart';
 import '../../../auth/presentation/screens/login_screen.dart';
 import '../../../bill/presentation/screens/new_bills_screen.dart';
 import '../../../bill/presentation/screens/other_bills_screen.dart';
+import '../../../language/presentation/screen/language_selection_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -31,6 +33,14 @@ class _HomeScreenState extends State<HomeScreen>
     _tabController = TabController(length: 2, vsync: this);
     fetchAndSaveBills();
     loadUserName();
+    SessionManager().start(context);
+  }
+
+  @override
+  void dispose() {
+    SessionManager().stop();
+    _tabController.dispose();
+    super.dispose();
   }
 
   void loadUserName() async {
@@ -61,33 +71,42 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(userName),
-        bottom: TabBar(
-          controller: _tabController,
-          tabs: [Tab(text: 'New'), Tab(text: 'Others')],
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.exit_to_app),
-            onPressed: () async {
-              final helper = SharedPreferencesHelper();
-              await helper.saveLoginStatus(false);
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => LoginScreen()),
-              );
-            },
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onTap: () {
+        SessionManager().userInteracted();
+      },
+      onPanDown: (_) {
+        SessionManager().userInteracted();
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(userName),
+          bottom: TabBar(
+            controller: _tabController,
+            tabs: [Tab(text: 'New'), Tab(text: 'Others')],
           ),
-        ],
-      ),
-      body: TabBarView(
-        controller: _tabController,
-        children: [
-          NewBillsScreen(newBills: newBills),
-          OtherBillsScreen(otherBills: otherBills),
-        ],
+          actions: [
+            IconButton(
+              icon: Icon(Icons.language),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LanguageSelectionScreen(),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+        body: TabBarView(
+          controller: _tabController,
+          children: [
+            NewBillsScreen(newBills: newBills),
+            OtherBillsScreen(otherBills: otherBills),
+          ],
+        ),
       ),
     );
   }
