@@ -11,7 +11,6 @@ class OtherBillsScreen extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          // محتوى الشاشة
           Expanded(
             child:
                 otherBills.isEmpty
@@ -44,75 +43,100 @@ class OtherBillsScreen extends StatelessWidget {
                         final bill = otherBills[index];
                         final status = _getStatus(bill.billType);
                         final amount = bill.billAmt.split('.').first;
+                        final statusColor = _getStatusColor(status);
+                        final buttonColor = _getButtonColor(status);
+
                         return Container(
                           margin: EdgeInsets.only(bottom: 16),
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(12),
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.black12,
-                                blurRadius: 4,
-                                offset: Offset(0, 2),
+                                blurRadius: 6,
+                                offset: Offset(0, 3),
                               ),
                             ],
                           ),
-                          child: Padding(
-                            padding: EdgeInsets.all(16),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  '#${bill.billNo}',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        '#${bill.billNo}',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      SizedBox(height: 12),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text('Status'),
+                                          Text(
+                                            status,
+                                            style: TextStyle(
+                                              color: statusColor,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(height: 8),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text('Total price'),
+                                          Text('$amount LE'),
+                                        ],
+                                      ),
+                                      SizedBox(height: 8),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text('Date'),
+                                          Text(bill.billDate),
+                                        ],
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                SizedBox(height: 12),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text('Status'),
-                                    Text(
-                                      status,
+                              ),
+                              Container(
+                                height: 100,
+                                width: 60,
+                                decoration: BoxDecoration(
+                                  color: buttonColor,
+                                  borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(12),
+                                    bottomRight: Radius.circular(12),
+                                  ),
+                                ),
+                                child: Center(
+                                  child: RotatedBox(
+                                    quarterTurns: 3,
+                                    child: Text(
+                                      'Order Details',
                                       style: TextStyle(
-                                        color: _getStatusColor(status),
+                                        color: Colors.white,
                                         fontWeight: FontWeight.bold,
+                                        fontSize: 12,
                                       ),
                                     ),
-                                  ],
-                                ),
-                                SizedBox(height: 8),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text('Total price'),
-                                    Text('$amount LE'),
-                                  ],
-                                ),
-                                SizedBox(height: 8),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [Text('Date'), Text(bill.billDate)],
-                                ),
-                                SizedBox(height: 12),
-                                Divider(height: 1),
-                                SizedBox(height: 8),
-                                Center(
-                                  child: Text(
-                                    'Order Details',
-                                    style: TextStyle(
-                                      color: Colors.blue,
-                                      fontWeight: FontWeight.bold,
-                                    ),
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         );
                       },
@@ -144,6 +168,19 @@ class OtherBillsScreen extends StatelessWidget {
         return Colors.green;
       case 'Returned':
         return Colors.red;
+      default:
+        return Colors.grey;
+    }
+  }
+
+  Color _getButtonColor(String status) {
+    switch (status) {
+      case 'Delivering':
+        return Colors.teal;
+      case 'Delivered':
+        return Colors.grey.shade700;
+      case 'Returned':
+        return Colors.red.shade700;
       default:
         return Colors.grey;
     }
