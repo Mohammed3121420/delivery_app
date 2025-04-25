@@ -1,16 +1,18 @@
-# delivery_app
+#Overview
+This is a Flutter application that allows users to log in using an API and stores data locally using SQLite. The app also features data filtering and automatically logs the user out after two minutes of inactivity.
 
-A new Flutter project.
+##Key Features
+-Login: The app uses an API to validate user data (User ID, Password, and Language).
 
-## Getting Started
+-Local Storage: Data is stored locally in SQLite, making the app usable offline.
 
-This project is a starting point for a Flutter application.
+-Data Filtering: The app allows filtering of stored data using SQL queries.
 
-A few resources to get you started if this is your first Flutter project:
+-Automatic Logout: After two minutes of inactivity, the user is automatically logged out.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+##Design Choices
+-Local Storage with SQLite: SQLite was chosen for local data storage to ensure offline access.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+-API Interaction: The app uses an API to log in and validate the user.
+
+-State Management with Provider: Provider is used for state management, facilitating interaction between the frontend and backend.
