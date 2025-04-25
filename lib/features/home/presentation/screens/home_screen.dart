@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/utils/api_service.dart';
 import '../../../../core/utils/database_helper.dart';
 import '../../../../core/utils/shared_preferences_helper.dart';
-import '../../../../methods/session_manager.dart';
+import '../../../../core/utils/session_manager.dart';
 import '../../../auth/data/models/bill_item.dart';
 import '../../../auth/presentation/screens/login_screen.dart';
 import '../../../bill/presentation/screens/new_bills_screen.dart';
