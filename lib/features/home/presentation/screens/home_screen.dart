@@ -4,7 +4,6 @@ import '../../../../core/utils/database_helper.dart';
 import '../../../../core/utils/shared_preferences_helper.dart';
 import '../../../../core/utils/session_manager.dart';
 import '../../../auth/data/models/bill_item.dart';
-import '../../../auth/presentation/screens/login_screen.dart';
 import '../../../bill/presentation/screens/new_bills_screen.dart';
 import '../../../bill/presentation/screens/other_bills_screen.dart';
 import '../../../language/presentation/screen/language_selection_screen.dart';
@@ -14,6 +13,7 @@ class HomeScreen extends StatefulWidget {
   static const route = "/HomeScreen";
 
   @override
+  // ignore: library_private_types_in_public_api
   _HomeScreenState createState() => _HomeScreenState();
 }
 
