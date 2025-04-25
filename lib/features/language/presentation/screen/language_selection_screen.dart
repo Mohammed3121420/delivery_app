@@ -7,7 +7,7 @@ class LanguageSelectionScreen extends StatefulWidget {
 }
 
 class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
-  String? selectedLanguage = 'en'; // القيمة الافتراضية
+  String? selectedLanguage = 'en'; 
 
   void applyLanguage() {
     if (selectedLanguage != null) {

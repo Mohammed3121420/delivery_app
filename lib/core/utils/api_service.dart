@@ -6,7 +6,6 @@ class ApiService {
   final String apiUrl =
       'http://mdev.yemensoft.net:8087/OnyxDeliveryService/Service.svc/GetDeliveryBillsItems';
 
-  // دالة لجلب بيانات الفواتير من API
   Future<List<BillItem>> fetchBillItems() async {
     try {
       final response = await http.post(

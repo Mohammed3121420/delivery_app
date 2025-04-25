@@ -4,7 +4,7 @@ import '../../../auth/data/models/bill_item.dart';
 class NewBillsScreen extends StatelessWidget {
   final List<BillItem> newBills;
 
-  const NewBillsScreen({Key? key, required this.newBills}) : super(key: key);
+  const NewBillsScreen({super.key, required this.newBills});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class NewBillsScreen extends StatelessWidget {
                     Container(
                       padding: EdgeInsets.all(30),
                       decoration: BoxDecoration(
-                        color: Color(0xFFFFE6E6), // لون وردي فاتح مشابه للصورة
+                        color: Color(0xFFFFE6E6),
                         shape: BoxShape.circle,
                       ),
                       child: Icon(

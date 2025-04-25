@@ -21,9 +21,7 @@ class OtherBillsScreen extends StatelessWidget {
                           Container(
                             padding: EdgeInsets.all(30),
                             decoration: BoxDecoration(
-                              color: Color(
-                                0xFFFFE6E6,
-                              ), // لون وردي فاتح مشابه للصورة
+                              color: Color(0xFFFFE6E6),
                               shape: BoxShape.circle,
                             ),
                             child: Icon(

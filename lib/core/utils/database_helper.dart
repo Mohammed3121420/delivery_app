@@ -19,7 +19,7 @@ class DatabaseHelper {
     final path = join(dbPath, filePath);
     return await openDatabase(
       path,
-      version: 4, 
+      version: 4,
       onCreate: _createDB,
       onUpgrade: _onUpgrade,
     );
@@ -47,8 +47,7 @@ class DatabaseHelper {
     await db.insert(
       'bills',
       bill.toMap(),
-      conflictAlgorithm:
-          ConflictAlgorithm.replace, 
+      conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
 

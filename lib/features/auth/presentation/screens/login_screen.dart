@@ -25,7 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _isLoading = false;
   bool _showPassword = false;
   String _errorMessage = '';
-  String _currentLanguage = 'ar'; // default
+  String _currentLanguage = 'en';
 
   Future<void> _login() async {
     setState(() {

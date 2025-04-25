@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:delivery_app/features/auth/presentation/screens/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SessionManager with WidgetsBindingObserver {
   static final SessionManager _instance = SessionManager._internal();
@@ -8,7 +9,7 @@ class SessionManager with WidgetsBindingObserver {
   SessionManager._internal();
 
   Timer? _inactivityTimer;
-  final int timeoutInSeconds = 2 * 60; 
+  final int timeoutInSeconds = 2 * 60;
   late BuildContext _context;
 
   void start(BuildContext context) {
@@ -31,15 +32,24 @@ class SessionManager with WidgetsBindingObserver {
     _inactivityTimer = Timer(Duration(seconds: timeoutInSeconds), _logoutUser);
   }
 
-  void _logoutUser() {
-    Navigator.of(_context).pushNamedAndRemoveUntil(LoginScreen.route, (route) => false);
+  void _logoutUser() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+
+    Navigator.of(
+      _context,
+    ).pushNamedAndRemoveUntil(LoginScreen.route, (route) => false);
   }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.paused || state == AppLifecycleState.inactive) {
+    if (state == AppLifecycleState.paused ||
+        state == AppLifecycleState.inactive) {
       _inactivityTimer?.cancel();
-      _inactivityTimer = Timer(Duration(seconds: timeoutInSeconds), _logoutUser);
+      _inactivityTimer = Timer(
+        Duration(seconds: timeoutInSeconds),
+        _logoutUser,
+      );
     } else if (state == AppLifecycleState.resumed) {
       _resetTimer();
     }

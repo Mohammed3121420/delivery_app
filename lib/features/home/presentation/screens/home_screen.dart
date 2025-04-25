@@ -47,16 +47,16 @@ class _HomeScreenState extends State<HomeScreen>
     final helper = SharedPreferencesHelper();
     final name = await helper.getUserName();
     setState(() {
-      userName = name ?? 'User'; // قيمة افتراضية إذا كان الاسم فارغًا أو null
+      userName = name ?? 'User'; 
     });
   }
 
   Future<void> fetchAndSaveBills() async {
     final billItems = await apiService.fetchBillItems();
     for (var bill in billItems) {
-      await dbHelper.insertBillItem(bill); // حفظ في SQLite
+      await dbHelper.insertBillItem(bill); 
     }
-    await loadBillsFromDB(); // تحميل من SQLite
+    await loadBillsFromDB(); 
   }
 
   Future<void> loadBillsFromDB() async {
