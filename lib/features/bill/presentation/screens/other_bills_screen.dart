@@ -18,20 +18,33 @@ class OtherBillsScreen extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.receipt, size: 60, color: Colors.grey),
-                          SizedBox(height: 16),
+                          Container(
+                            padding: EdgeInsets.all(30),
+                            decoration: BoxDecoration(
+                              color: Color(
+                                0xFFFFE6E6,
+                              ), // لون وردي فاتح مشابه للصورة
+                              shape: BoxShape.circle,
+                            ),
+                            child: Icon(
+                              Icons.assignment,
+                              size: 60,
+                              color: Colors.pinkAccent,
+                            ),
+                          ),
+                          SizedBox(height: 24),
                           Text(
                             'No orders yet',
                             style: TextStyle(
-                              fontSize: 18,
+                              fontSize: 20,
                               fontWeight: FontWeight.bold,
-                              color: Colors.grey,
+                              color: Colors.black87,
                             ),
                           ),
                           SizedBox(height: 8),
                           Text(
                             'You don\'t have any orders in your history',
-                            style: TextStyle(color: Colors.grey),
+                            style: TextStyle(color: Colors.black54),
                           ),
                         ],
                       ),
