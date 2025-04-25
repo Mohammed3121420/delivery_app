@@ -13,12 +13,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Your App Name',
       initialRoute: '/splash',
       routes: {
         '/splash': (context) => SplashScreen(),
-        '/login': (context) => LoginScreen(),
-        '/home': (context) => HomeScreen(),
+        LoginScreen.route: (context) => LoginScreen(),
+        HomeScreen.route: (context) => HomeScreen(),
       },
     );
   }

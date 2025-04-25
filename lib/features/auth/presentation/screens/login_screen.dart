@@ -1,10 +1,17 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:delivery_app/features/home/presentation/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/utils/shared_preferences_helper.dart';
 import '../../../language/presentation/screen/language_selection_screen.dart';
 import '../../data/services/login_service.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+  static const route = "/LoginScreen";
+
   @override
+  // ignore: library_private_types_in_public_api
   _LoginScreenState createState() => _LoginScreenState();
 }
 
@@ -35,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if (result['success']) {
       await _sharedPreferencesHelper.saveLoginStatus(true);
       await _sharedPreferencesHelper.saveUserName(result['name'] ?? '');
-      Navigator.pushReplacementNamed(context, '/home');
+      Navigator.pushReplacementNamed(context, HomeScreen.route);
     } else {
       setState(() {
         _errorMessage =

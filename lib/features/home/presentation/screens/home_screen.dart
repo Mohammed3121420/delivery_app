@@ -8,6 +8,9 @@ import '../../../bill/presentation/screens/new_bills_screen.dart';
 import '../../../bill/presentation/screens/other_bills_screen.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+  static const route = "/HomeScreen";
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -68,7 +71,9 @@ class _HomeScreenState extends State<HomeScreen>
         actions: [
           IconButton(
             icon: Icon(Icons.exit_to_app),
-            onPressed: () {
+            onPressed: () async {
+              final helper = SharedPreferencesHelper();
+              await helper.saveLoginStatus(false);
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => LoginScreen()),

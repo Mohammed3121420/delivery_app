@@ -1,3 +1,5 @@
+import 'package:delivery_app/features/auth/presentation/screens/login_screen.dart';
+import 'package:delivery_app/features/home/presentation/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/shared_preferences_helper.dart';
@@ -21,12 +23,12 @@ class _SplashScreenState extends State<SplashScreen> {
     if (isLoggedIn) {
       Navigator.pushReplacementNamed(
         context,
-        '/home',
+        HomeScreen.route,
       ); 
     } else {
       Navigator.pushReplacementNamed(
         context,
-        '/login',
+        LoginScreen.route,
       ); 
     }
   }
